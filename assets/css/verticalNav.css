@@ -1,0 +1,23 @@
+.verticalNav{
+    position: fixed;
+    width: 20vw;
+    padding: 0;
+    height: 100vh;
+    background-color: #202933;
+}
+.verticalNav ul{
+    padding: 0;
+    margin: 5% 0;
+}
+.verticalNav ul li {
+    list-style-type: none;
+    width: 100%;
+    margin: 0 auto;
+}
+.verticalNav ul li a {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 10px;
+    display: block;
+    color: white;
+}

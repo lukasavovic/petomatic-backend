@@ -1,0 +1,252 @@
+body{
+    opacity: 1;
+    font-family: 'Open Sans', sans-serif;
+}
+.container-fluid{
+    padding: 0;
+}
+.admin-body-wrapper{
+    position: relative;
+}
+.navBar-left{
+    background-color: white;
+    top: 0;
+    display: flex;
+    height: 10vh;
+    align-items: center;
+}
+.navBar-left h3 {
+    padding-left: 5%;
+    width: 100%;
+    font-weight: 900;
+    color: darkslategray;
+    font-size: 1.2em;
+}
+.fas {
+    padding-right: 5px;
+}
+.fa-arrow-left{
+    transition: 1s all step-start;
+    font-size: 20px;
+    padding: 20px;
+    color: white;
+}
+.fa-user-tie{
+    color: white;
+    padding: 5%;
+    font-size: 25px;
+}
+.header {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    background-color: #23CE6B;
+}
+.header h1{
+    padding-left: 10%;
+    width: 100%;
+    font-size: 1.2em;
+    font-weight: 800;
+    color: white;
+    margin: 0;
+}
+.verticalNav{
+    position: fixed;
+    width: 20vw;
+    padding: 0;
+    height: 100vh;
+    background-color: #202933;
+}
+.verticalNav ul{
+    padding: 0;
+    margin: 5% 0;
+}
+.verticalNav ul li {
+    list-style-type: none;
+    width: 100%;
+    margin: 0 auto;
+}
+.verticalNav ul li a {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 10px;
+    display: block;
+    color: white;
+}
+.verticalNav ul li a:hover {
+    text-decoration: none;
+    color: #23CE6B;
+}
+.admin-body{
+    margin-left: 20vw;
+    transition: 0.2s all ease;
+    background-color: #ecf0f1;
+}
+.index-admin {
+    padding: 2% 5%;
+    height: 100%;
+}
+#menuHide{
+    margin: 0 auto;
+}
+.hide{
+    display: none;
+}
+.column1{
+    grid-template-columns: 1fr;
+}
+
+.expand{
+    margin-left: 10vw;
+}
+.hiddenNav {
+    width: 10vw;
+}
+
+.hidden{
+    display: none;
+}
+.addNew {
+    color: #202933;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+.fa-plus-circle{
+    font-size: 30px;
+    color: darkslategray;
+}
+.addNew:hover {
+    text-decoration: none;
+}
+.addNew:hover > .fa-plus-circle {
+    color: #23CE6B;
+}
+
+.product-table{
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+.singleProduct {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    padding-bottom: 20px;
+    max-height: 40vh;
+}
+.singleProduct .picture {
+    align-self: center;
+    background-position:center;
+    position: relative;
+    background-size:cover;
+    height: 100%;
+}
+.singleProduct .description {
+    padding: 5%;
+    padding-left: 10%;
+    background-color: #efefef;
+    display: flex;
+    flex-direction: column;
+}
+.singleProduct .description h4{
+    text-align: center;
+    padding: 20px;
+    font-weight: 900;
+}
+.buttons {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.formButton{
+    color: #c4c4c4;
+    background: none;
+    border: none;
+    font-size: 35px;
+    padding: 5px;
+    cursor: pointer;
+}
+.formButton:focus{
+    outline:none 
+}
+
+@media(max-width:768px){
+    .formButton{
+        font-size: 24px;
+    }
+    .verticalNav ul li a {
+        font-size: 12px;
+        padding: 15px 5px;
+    }
+}
+@media(max-width:1068px){
+    .product-table{
+        grid-template-columns: 1fr;
+    }
+}
+.fa-edit:hover {
+    color: #202933;
+}
+.fa-minus-circle:hover {
+    color: #9b1143;
+}
+
+@media(max-width:568px){
+    .expand{
+        margin-left: 10vw;
+    }
+    .hiddenNav {
+        width: 10vw;
+    }
+    
+}
+
+#backHome {
+    font-size: 25px;
+    color: #202933;
+}
+.backHome{
+    color: #202933;
+    font-weight: bolder;
+}
+.backHome:hover{
+    text-decoration: none;
+    color: #202933;
+}
+.backHome:hover > #backHome{
+    color: #e02469;
+}
+
+
+.singleProduct-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    padding-bottom: 20px;
+    height: 80vh;
+}
+.singleProduct-page .picture {
+    align-self: center;
+    background-position:center;
+    position: relative;
+    background-size:cover;
+    height: 100%;
+}
+.singleProduct-page .description {
+    padding: 5%;
+    padding-left: 10%;
+    background-color: #efefef;
+    display: flex;
+    flex-direction: column;
+}
+.singleProduct-page .description h4{
+    text-align: center;
+    padding: 20px;
+    font-weight: 900;
+}
+.create-wrapper {
+    margin-top: 3vh;
+}

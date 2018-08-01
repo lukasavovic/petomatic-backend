@@ -17,6 +17,7 @@ class QueryBuilder
         $query = $this->pdo->prepare("SELECT * FROM {$table}");
         $query->execute();
 
+
         if($model) {
             return $query->fetchAll(\PDO::FETCH_CLASS, $model);
         } else {
@@ -26,12 +27,11 @@ class QueryBuilder
 
     public function addNew($table, $payload)
     {
-        $target_file = "assets/uploads/" . basename($_FILES['image']['name']);
-        $title = $payload['title'];
-        $description = $payload['description'];
-        $image = $target_file;
-        move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
-        $sql = "INSERT INTO $table (title, description, image) VALUES ( \"$title \", \"$description\", \"/$image\")";
+        $sql = sprintf("INSERT INTO %s (%s) VALUES (%s)",
+          $table,
+          implode(", ", array_keys($payload)),
+          ":" . implode(", :", array_keys($payload))
+        );
         $query = $this->pdo->prepare($sql);
         $query->execute($payload);
     }

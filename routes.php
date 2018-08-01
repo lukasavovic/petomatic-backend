@@ -14,4 +14,3 @@ $router->get('admin/products/show', "ProductsController@show");
 $router->get('admin/products/edit', "ProductsController@edit");
 $router->post('admin/products/update', "ProductsController@update");
 $router->post('admin/products/destroy', "ProductsController@destroy");
-

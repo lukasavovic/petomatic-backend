@@ -26,18 +26,24 @@ class Router
 
   public function direct($uri, $requestMethod) {
 
-    if(array_key_exists($uri, $this->routes[$requestMethod])) {
 
-      if($this->routes[$requestMethod][$uri][1]) {
+    $route = $this->matchRoute($this->routes[$requestMethod], $uri);
+
+    if(!is_null($route)) {
+
+      if($route[1]) {
 
         if(isset($_SESSION['auth'])){
-          $this->callAction(...explode('@', $this->routes[$requestMethod][$uri][0]));
+          $this->callAction(...explode('@', $route[0]));
         }else{
           json_encode('login failed');
         }
-
       }else{
-        $this->callAction(...explode('@', $this->routes[$requestMethod][$uri][0]));
+          $exploded = explode('@', $route[0]);
+          $route['controller'] = $exploded[0];
+          $route['action'] = $exploded[1];
+
+        $this->callAction($route['controller'], $route['action'], $route['parameters']);
       }
 
     } else {
@@ -45,12 +51,57 @@ class Router
     }
   }
 
-  public function callAction($controller, $method) {
+    /**
+     * @param array $routes
+     * @param string $uri
+     * @return null|array
+     */
+  private function matchRoute($routes, $uri)
+  {
+
+      $uriParts = explode('/', $uri);
+
+        foreach ($routes as $route => $routeData) {
+            $routeParts = explode('/', $route);
+            if (count($uriParts) !== count($routeParts)) {
+                continue;
+            }
+
+            $matched = false;
+            for ($i = 0; $i < count($uriParts); $i++) {
+                if ($uriParts[$i] === $routeParts[$i]) {
+                    $matched = true;
+                    continue;
+                }
+
+                if (false !== strpos($routeParts[$i], '{')) {
+                    // {userId}
+
+                    $paramName = trim($routeParts[$i],'{\}');
+                    $matched = true;
+                    $routeData['parameters'][$paramName] = $uriParts[$i];
+                    continue;
+                }
+
+                else {
+                    $matched = false;
+                }
+            }
+
+            if ($matched) {
+                return $routeData;
+            }
+        }
+
+        return null;
+  }
+
+  public function callAction($controller, $method, $params = null) {
     $c = "\\App\\Controllers\\{$controller}";
     $c = new $c;
     if(!method_exists($c, $method)) {
       throw new \Exception('No method');
     }
-    return $c->$method();
+    return $c->$method($params);
   }
 }

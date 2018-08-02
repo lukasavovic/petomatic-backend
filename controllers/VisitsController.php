@@ -16,7 +16,7 @@ class VisitsController
     echo "<pre>" . json_encode($visit) . "</pre>";
   }
 
-  public function addCustomer(){
+  public function addVisit(){
     App::get('database')->addNew('visit', $_POST);
     echo json_encode('sucess');
   }

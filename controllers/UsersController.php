@@ -10,8 +10,8 @@ class UsersController
     echo "<pre>" . json_encode($users) . "</pre>";
   }
 
-  public function oneUser(){
-    $user = App::get('database')->getOne('users', $_GET['id']);
+  public function oneUser($params){
+    $user = App::get('database')->getOne('users', $params['userId']);
     echo json_encode($user);
   }
 

@@ -21,3 +21,9 @@ function view($file, $data = []) {
 function redirect($path) {
     header("Location: {$path}");
 }
+
+function hashPassword($credentials){
+  $password = $credentials['password'];
+  $password = crypt($password, '$1$rasmusle$') . "\n";
+  return $password;
+}

@@ -21,8 +21,11 @@ class ComposerStaticInit85e74278e4e4ecc18c1382107cec544c
     );
 
     public static $classMap = array (
+        'App\\Controllers\\Authenticate' => __DIR__ . '/../..' . '/controllers/Authenticate.php',
+        'App\\Controllers\\CustomerController' => __DIR__ . '/../..' . '/controllers/CustomerController.php',
         'App\\Controllers\\PagesController' => __DIR__ . '/../..' . '/controllers/PagesController.php',
-        'App\\Controllers\\ProductsController' => __DIR__ . '/../..' . '/controllers/ProductsController.php',
+        'App\\Controllers\\UsersController' => __DIR__ . '/../..' . '/controllers/UsersController.php',
+        'App\\Controllers\\VisitsController' => __DIR__ . '/../..' . '/controllers/VisitsController.php',
         'App\\Core\\App' => __DIR__ . '/../..' . '/core/App.php',
         'App\\Core\\Request' => __DIR__ . '/../..' . '/core/Request.php',
         'App\\Core\\Router' => __DIR__ . '/../..' . '/core/Router.php',
@@ -602,7 +605,6 @@ class ComposerStaticInit85e74278e4e4ecc18c1382107cec544c
         'Faker\\Test\\Provider\\zh_TW\\TextTest' => __DIR__ . '/..' . '/fzaninotto/faker/test/Faker/Provider/zh_TW/TextTest.php',
         'Faker\\UniqueGenerator' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/UniqueGenerator.php',
         'Faker\\ValidGenerator' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/ValidGenerator.php',
-        'Task' => __DIR__ . '/../..' . '/core/Task.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

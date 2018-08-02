@@ -6,8 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Controllers\\Authenticate' => $baseDir . '/controllers/Authenticate.php',
+    'App\\Controllers\\CustomerController' => $baseDir . '/controllers/CustomerController.php',
     'App\\Controllers\\PagesController' => $baseDir . '/controllers/PagesController.php',
-    'App\\Controllers\\ProductsController' => $baseDir . '/controllers/ProductsController.php',
+    'App\\Controllers\\UsersController' => $baseDir . '/controllers/UsersController.php',
+    'App\\Controllers\\VisitsController' => $baseDir . '/controllers/VisitsController.php',
     'App\\Core\\App' => $baseDir . '/core/App.php',
     'App\\Core\\Request' => $baseDir . '/core/Request.php',
     'App\\Core\\Router' => $baseDir . '/core/Router.php',
@@ -587,5 +590,4 @@ return array(
     'Faker\\Test\\Provider\\zh_TW\\TextTest' => $vendorDir . '/fzaninotto/faker/test/Faker/Provider/zh_TW/TextTest.php',
     'Faker\\UniqueGenerator' => $vendorDir . '/fzaninotto/faker/src/Faker/UniqueGenerator.php',
     'Faker\\ValidGenerator' => $vendorDir . '/fzaninotto/faker/src/Faker/ValidGenerator.php',
-    'Task' => $baseDir . '/core/Task.php',
 );

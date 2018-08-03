@@ -11,8 +11,8 @@ class CustomerController
     echo "<pre>" . json_encode($customers) . "</pre>";
   }
 
-  public function oneCustomer(){
-    $customer = App::get('database')->getOne('customers', $_GET['id']);
+  public function oneCustomer($params){
+    $customer = App::get('database')->getOne('customers', $params['customerId']);
     echo "<pre>" . json_encode($customer) . "</pre>";
   }
 

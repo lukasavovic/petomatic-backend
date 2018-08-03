@@ -45,7 +45,7 @@ class QueryBuilder
     }
 
     public function leftJoin($table1, $table2, $table1Column, $table2Column, $additional = "*"){
-        $query = $this->pdo->prepare("SELECT {$additional} FROM {$table1} LEFT JOIN {$table2} ON {$table1}.{$table1Column} = {$table2}.{$table2Column}");
+        $query = $this->pdo->prepare("SELECT {$additional} FROM {$table1} LEFT JOIN {$table2} ON {$table1}.{$table1Column} = {$table2}.{$table2Column} ORDER BY {$table1}.date DESC");
         $query->execute();
         return $query->fetchAll(\PDO::FETCH_OBJ);
     }

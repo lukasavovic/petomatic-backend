@@ -10,7 +10,7 @@ $router->get('users/{userId}', 'UsersController@oneUser');
 $router->post('users', 'Authenticate@addUser');
 //Customers
 $router->get('customers', 'CustomerController@allCustomers');
-$router->get('customers/show', 'CustomerController@oneCustomer');
+$router->get('customers/{customerId}', 'CustomerController@oneCustomer');
 $router->post('customers/', 'CustomerController@addCustomer');
 //Visits
 $router->get('visits', 'VisitsController@allVisits');

@@ -7,11 +7,12 @@ class UsersController
 {
   public function allUsers(){
     $users = App::get('database')->getAll('users');
-    echo "<pre>" . json_encode($users) . "</pre>";
+    echo json_encode($users);
   }
 
   public function oneUser($params){
     $user = App::get('database')->getOne('users', $params['userId']);
+//    dd($user);
     echo json_encode($user);
   }
 

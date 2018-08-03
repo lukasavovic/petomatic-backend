@@ -42,8 +42,11 @@ class Router
           $exploded = explode('@', $route[0]);
           $route['controller'] = $exploded[0];
           $route['action'] = $exploded[1];
-
-        $this->callAction($route['controller'], $route['action'], $route['parameters']);
+          if (isset($route['parameters'])){
+            $this->callAction($route['controller'], $route['action'], $route['parameters']);
+          } else {
+            $this->callAction($route['controller'], $route['action']);
+          }
       }
 
     } else {
@@ -60,7 +63,6 @@ class Router
   {
 
       $uriParts = explode('/', $uri);
-
         foreach ($routes as $route => $routeData) {
             $routeParts = explode('/', $route);
             if (count($uriParts) !== count($routeParts)) {
@@ -69,25 +71,22 @@ class Router
 
             $matched = false;
             for ($i = 0; $i < count($uriParts); $i++) {
-                if ($uriParts[$i] === $routeParts[$i]) {
-                    $matched = true;
-                    continue;
-                }
+              if ($uriParts[$i] === $routeParts[$i]) {
+                $matched = true;
+                continue;
+              }
 
-                if (false !== strpos($routeParts[$i], '{')) {
-                    // {userId}
-
-                    $paramName = trim($routeParts[$i],'{\}');
-                    $matched = true;
-                    $routeData['parameters'][$paramName] = $uriParts[$i];
-                    continue;
-                }
+              if (false !== strpos($routeParts[$i], '{') && $uriParts[$i-1] === $routeParts[$i-1]) {
+                $paramName = trim($routeParts[$i],'{\}');
+                $matched = true;
+                $routeData['parameters'][$paramName] = $uriParts[$i];
+                continue;
+              }
 
                 else {
                     $matched = false;
                 }
             }
-
             if ($matched) {
                 return $routeData;
             }

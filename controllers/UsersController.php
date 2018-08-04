@@ -12,7 +12,6 @@ class UsersController
 
   public function oneUser($params){
     $user = App::get('database')->getOne('users', $params['userId']);
-//    dd($user);
     echo json_encode($user);
   }
 

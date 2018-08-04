@@ -11,16 +11,10 @@ class QueryBuilder
         $this->pdo = $pdo;
     }
 
-    public function getAll($table, $model = ""){
+    public function getAll($table){
         $query = $this->pdo->prepare("SELECT * FROM {$table}");
         $query->execute();
-
-
-        if($model) {
-            return $query->fetchAll(\PDO::FETCH_CLASS, $model);
-        } else {
-            return $query->fetchAll(\PDO::FETCH_OBJ);
-        }
+        return $query->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public function addNew($table, $payload){
@@ -31,6 +25,7 @@ class QueryBuilder
         );
         $query = $this->pdo->prepare($sql);
         $query->execute($payload);
+        echo ($query->execute($payload));
     }
 
     public function getOne($table, $id){
@@ -39,13 +34,40 @@ class QueryBuilder
         return $query->fetch(\PDO::FETCH_OBJ);
     }
 
+    public function getOneUser($table, $email, $model = "")
+    {
+      $query = $this->pdo->prepare("SELECT * FROM {$table} WHERE email='{$email}'");
+      $query->execute();
+      if($model) {
+        return $query->fetch(\PDO::FETCH_CLASS, $model);
+      } else {
+        return $query->fetch(\PDO::FETCH_OBJ);
+      }
+    }
+
     public function destroy($table, $id){
         $query = $this->pdo->prepare("DELETE FROM {$table} WHERE id='{$id}'");
         $query->execute();
     }
 
     public function leftJoin($table1, $table2, $table1Column, $table2Column, $additional = "*"){
-        $query = $this->pdo->prepare("SELECT {$additional} FROM {$table1} LEFT JOIN {$table2} ON {$table1}.{$table1Column} = {$table2}.{$table2Column} ORDER BY {$table1}.date DESC");
+        $query = $this->pdo->prepare("SELECT {$additional} FROM {$table1} LEFT JOIN {$table2} ON {$table1}.{$table1Column} = {$table2}.{$table2Column}");
+        $query->execute();
+        return $query->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function allVisits(){
+        $query = $this->pdo->prepare("SELECT visits.date, visits.id AS id, longDescription, customers.id AS customerId, customers.firstName, customers.LastName, pets.name AS petName, pets.id as petID, pets.age, visit_type.title AS visit_type, species.title AS species
+                                      FROM visits 
+                                      LEFT JOIN pets
+                                      ON visits.pet_id = pets.id
+                                      LEFT JOIN customers
+                                      ON visits.customers_id = customers.id
+                                      LEFT JOIN visit_type
+                                      ON visits.visitType_id = visit_type.id
+                                      LEFT JOIN species
+                                      ON pets.species_id = species.id
+                                      ORDER BY visits.date DESC");
         $query->execute();
         return $query->fetchAll(\PDO::FETCH_OBJ);
     }

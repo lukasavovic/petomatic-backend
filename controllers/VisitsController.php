@@ -6,9 +6,8 @@ use App\Core\App;
 class VisitsController
 {
   public function allVisits(){
-    $columns = 'date, longDescription, visits.customers_id, pets.id, name';
-    $visits = App::get('database')->leftJoin('visits','pets', 'pet_id', 'id',$columns);
-    echo "<pre>" . json_encode($visits) . "</pre>";
+    $visits = App::get('database')->allVisits();
+    echo json_encode($visits);
   }
 
   public function oneVisit(){

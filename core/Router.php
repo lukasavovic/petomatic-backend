@@ -25,8 +25,6 @@ class Router
   }
 
   public function direct($uri, $requestMethod) {
-
-
     $route = $this->matchRoute($this->routes[$requestMethod], $uri);
 
     if(!is_null($route)) {
@@ -61,35 +59,28 @@ class Router
      */
   private function matchRoute($routes, $uri)
   {
-
-      $uriParts = explode('/', $uri);
+        $uriParts = explode('/', $uri);
         foreach ($routes as $route => $routeData) {
             $routeParts = explode('/', $route);
+
             if (count($uriParts) !== count($routeParts)) {
                 continue;
             }
 
-            $matched = false;
             for ($i = 0; $i < count($uriParts); $i++) {
-              if ($uriParts[$i] === $routeParts[$i]) {
-                $matched = true;
-                continue;
-              }
-
-              if (false !== strpos($routeParts[$i], '{') && $uriParts[$i-1] === $routeParts[$i-1]) {
-                $paramName = trim($routeParts[$i],'{\}');
-                $matched = true;
-                $routeData['parameters'][$paramName] = $uriParts[$i];
-                continue;
-              }
-
-                else {
-                    $matched = false;
+                if ($uriParts[$i] === $routeParts[$i]) {
+                    continue;
                 }
+
+                if (false !== strpos($routeParts[$i], '{')) {
+                    $routeData['parameters'][] = $uriParts[$i];
+                    continue;
+                }
+
+                continue 2;
             }
-            if ($matched) {
-                return $routeData;
-            }
+
+            return $routeData;
         }
 
         return null;
@@ -101,6 +92,6 @@ class Router
     if(!method_exists($c, $method)) {
       throw new \Exception('No method');
     }
-    return $c->$method($params);
+    return $c->$method(...$params);
   }
 }

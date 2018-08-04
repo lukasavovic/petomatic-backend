@@ -60,14 +60,15 @@ class QueryBuilder
         $query = $this->pdo->prepare("SELECT visits.date, visits.id AS id, longDescription, customers.id AS customerId, customers.firstName, customers.LastName, pets.name AS petName, pets.id as petID, pets.age, visit_type.title AS visit_type, species.title AS species
                                       FROM visits 
                                       LEFT JOIN pets
-                                      ON visits.pet_id = pets.id
+                                      ON visits.pets_id = pets.id
                                       LEFT JOIN customers
                                       ON visits.customers_id = customers.id
                                       LEFT JOIN visit_type
-                                      ON visits.visitType_id = visit_type.id
+                                      ON visits.visit_type_id = visit_type.id
                                       LEFT JOIN species
                                       ON pets.species_id = species.id
                                       ORDER BY visits.date DESC");
+
         $query->execute();
         return $query->fetchAll(\PDO::FETCH_OBJ);
     }

@@ -92,6 +92,12 @@ class Router
     if(!method_exists($c, $method)) {
       throw new \Exception('No method');
     }
-    return $c->$method(...$params);
+
+    if (is_array($params) || $params instanceof \Traversable) {
+        return $c->$method(...$params);
+    } else {
+        return $c->$method();
+    }
+
   }
 }

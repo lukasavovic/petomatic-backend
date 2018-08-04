@@ -109,7 +109,7 @@ INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `avatar
 
 -- Dumping data for table petomatic.visits: ~50 rows (approximately)
 /*!40000 ALTER TABLE `visits` DISABLE KEYS */;
-INSERT INTO `visits` (`id`, `date`, `longDescription`, `pet_id`, `customers_id`, `visitType_id`) VALUES
+INSERT INTO `visits` (`id`, `date`, `longDescription`, `pets_id`, `customers_id`, `visit_type_id`) VALUES
 	(1, '1983-07-12', 'D,\' she added aloud. \'Do you take me for asking! No, it\'ll never do to ask: perhaps I shall be late!\' (when she thought there was enough of me left to make herself useful, and looking at Alice for.', 1, 1, 1),
 	(2, '2010-05-15', 'I\'ve got back to my boy, I beat him when he sneezes; For he can EVEN finish, if he would not open any of them. However, on the floor, and a bright idea came into her eyes--and still as she heard was.', 2, 2, 3),
 	(3, '2000-11-22', 'The Footman seemed to be no chance of this, so that they must needs come wriggling down from the Queen shrieked out. \'Behead that Dormouse! Turn that Dormouse out of sight: \'but it sounds uncommon.', 3, 3, 2),

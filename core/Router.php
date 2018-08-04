@@ -92,6 +92,6 @@ class Router
     if(!method_exists($c, $method)) {
       throw new \Exception('No method');
     }
-    return $c->$method(...array_values($params));
+    return $c->$method(...$params);
   }
 }

@@ -73,8 +73,7 @@ class Router
                 }
 
                 if (false !== strpos($routeParts[$i], '{')) {
-                    $paramName = trim($routeParts[$i], '{\}');
-                    $routeData['parameters'][$paramName] = $uriParts[$i];
+                    $routeData['parameters'][] = $uriParts[$i];
                     continue;
                 }
 

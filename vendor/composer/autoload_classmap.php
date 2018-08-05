@@ -9,6 +9,7 @@ return array(
     'App\\Controllers\\Authenticate' => $baseDir . '/controllers/Authenticate.php',
     'App\\Controllers\\CustomerController' => $baseDir . '/controllers/CustomerController.php',
     'App\\Controllers\\PagesController' => $baseDir . '/controllers/PagesController.php',
+    'App\\Controllers\\PetsController' => $baseDir . '/controllers/PetsConroller.php',
     'App\\Controllers\\UsersController' => $baseDir . '/controllers/UsersController.php',
     'App\\Controllers\\VisitsController' => $baseDir . '/controllers/VisitsController.php',
     'App\\Core\\App' => $baseDir . '/core/App.php',

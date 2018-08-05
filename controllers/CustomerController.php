@@ -6,14 +6,25 @@ use App\Core\App;
 class CustomerController
 {
   public function allCustomers(){
-    $columns = 'firstName, lastName, email, pets.customers_id, pets.id, name, age, genders_id';
-    $customers = App::get('database')->leftJoin('customers','pets', 'id', 'customers_id', $columns);
+    $customers = App::get('database')->getAll('customers');
+    echo json_encode($customers);
+  }
+
+  public function allCustomersWithPets(){
+    $customers = App::get('database')->customersWithPets();
     echo json_encode($customers);
   }
 
   public function oneCustomer($params){
     $customer = App::get('database')->getOne('customers', $params['customerId']);
     echo json_encode($customer);
+  }
+
+  public function petsFromCustomers(){
+    $data = trim(file_get_contents("php://input"));
+    $id = json_decode($data, true);
+    $pets = App::get('database')->petsFromCustomers($id);
+    echo json_encode($pets);
   }
 
   /**

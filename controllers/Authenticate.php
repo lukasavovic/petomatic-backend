@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 use \App\Core\App;
 
@@ -23,13 +22,7 @@ class Authenticate {
     }
 
     public function loggedIn(){
-
         var_dump($_SESSION);
-        if(isset($_SESSION['auth'])){
-          echo 1;
-        } else {
-          echo 'User is not logged in';
-        }
     }
 
     public function logout(){

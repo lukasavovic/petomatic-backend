@@ -16,8 +16,13 @@ class VisitsController
   }
 
   public function addVisit(){
-    App::get('database')->addNew('visit', $_POST);
-    echo json_encode('sucess');
+    $data = trim(file_get_contents("php://input"));
+    $visit = json_decode($data, true);
+    App::get('database')->addNew('visits', $visit);
   }
 
+  public function visitTypes(){
+    $visits = App::get('database')->allVisitTypes();
+    echo json_encode($visits);
+  }
 }

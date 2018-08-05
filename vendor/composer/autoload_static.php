@@ -24,6 +24,7 @@ class ComposerStaticInit85e74278e4e4ecc18c1382107cec544c
         'App\\Controllers\\Authenticate' => __DIR__ . '/../..' . '/controllers/Authenticate.php',
         'App\\Controllers\\CustomerController' => __DIR__ . '/../..' . '/controllers/CustomerController.php',
         'App\\Controllers\\PagesController' => __DIR__ . '/../..' . '/controllers/PagesController.php',
+        'App\\Controllers\\PetsController' => __DIR__ . '/../..' . '/controllers/PetsConroller.php',
         'App\\Controllers\\UsersController' => __DIR__ . '/../..' . '/controllers/UsersController.php',
         'App\\Controllers\\VisitsController' => __DIR__ . '/../..' . '/controllers/VisitsController.php',
         'App\\Core\\App' => __DIR__ . '/../..' . '/core/App.php',

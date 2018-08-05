@@ -24,18 +24,21 @@ class QueryBuilder
           ":" . implode(", :", array_keys($payload))
         );
         $query = $this->pdo->prepare($sql);
-        $query->execute($payload);
-        echo ($query->execute($payload));
+        if($query->execute($payload) == true){
+          echo 1;
+        } else {
+          echo 'something went wrong';
+        }
+
     }
 
     public function getOne($table, $id){
-        $query = $this->pdo->prepare("SELECT * FROM {$table} WHERE id='{$id}'");
+      $query = $this->pdo->prepare("SELECT * FROM {$table} WHERE id='{$id}'");
         $query->execute();
         return $query->fetch(\PDO::FETCH_OBJ);
     }
 
-    public function getOneUser($table, $email, $model = "")
-    {
+    public function getOneUser($table, $email, $model = ""){
       $query = $this->pdo->prepare("SELECT * FROM {$table} WHERE email='{$email}'");
       $query->execute();
       if($model) {
@@ -68,8 +71,25 @@ class QueryBuilder
                                       LEFT JOIN species
                                       ON pets.species_id = species.id
                                       ORDER BY visits.date DESC");
-
         $query->execute();
         return $query->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function allVisitTypes(){
+      $query = $this->pdo->prepare("SELECT * FROM visit_type");
+      $query->execute();
+      return $query->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function customersNameAndId(){
+      $query = $this->pdo->prepare("SELECT customers.id AS customerId, customers.firstName, customers.LastName FROM cutomers");
+      $query->execute();
+      return $query->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function petsFromCustomers($id){
+      $query = $this->pdo->prepare("SELECT name, id FROM pets WHERE customers_id = $id");
+      $query->execute();
+      return $query->fetchAll(\PDO::FETCH_OBJ);
     }
 }

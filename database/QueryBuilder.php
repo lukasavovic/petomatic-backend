@@ -10,7 +10,7 @@ class QueryBuilder
     public function __construct($pdo){
         $this->pdo = $pdo;
     }
-
+//    Generic functions like get all, add new and get one
     public function getAll($table){
         $query = $this->pdo->prepare("SELECT * FROM {$table}");
         $query->execute();
@@ -33,19 +33,19 @@ class QueryBuilder
     }
 
     public function getOne($table, $id){
-      $query = $this->pdo->prepare("SELECT * FROM {$table} WHERE id='{$id}'");
+        $query = $this->pdo->prepare("SELECT * FROM {$table} WHERE id='{$id}'");
         $query->execute();
         return $query->fetch(\PDO::FETCH_OBJ);
     }
 
     public function getOneUser($table, $email, $model = ""){
-      $query = $this->pdo->prepare("SELECT * FROM {$table} WHERE email='{$email}'");
-      $query->execute();
-      if($model) {
-        return $query->fetch(\PDO::FETCH_CLASS, $model);
-      } else {
-        return $query->fetch(\PDO::FETCH_OBJ);
-      }
+        $query = $this->pdo->prepare("SELECT * FROM {$table} WHERE email='{$email}'");
+        $query->execute();
+        if($model) {
+          return $query->fetch(\PDO::FETCH_CLASS, $model);
+        } else {
+          return $query->fetch(\PDO::FETCH_OBJ);
+        }
     }
 
     public function destroy($table, $id){
@@ -91,5 +91,25 @@ class QueryBuilder
       $query = $this->pdo->prepare("SELECT name, id FROM pets WHERE customers_id = $id");
       $query->execute();
       return $query->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function addCustomer($decoded){
+      $customer = $decoded[0];
+      $pet = $decoded[1];
+      $sql = sprintf("INSERT INTO customers (%s) VALUES (%s);",
+        implode(", ", array_keys($customer)),
+        ":" . implode(", :", array_keys($customer))
+      );
+      $query = $this->pdo->prepare($sql);
+      echo $query->execute($customer);
+      //Getting last inserted id so it can be inserted as customers_id into pets
+      $last_id = $this->pdo->lastInsertId();
+      $pet['customers_id'] = $last_id;
+      $sql2 = sprintf("INSERT INTO pets (%s) VALUES (%s);",
+        implode(", ", array_keys($pet)),
+        ":" . implode(", :", array_keys($pet))
+      );
+      $query = $this->pdo->prepare($sql2);
+      echo $query->execute($pet);
     }
 }

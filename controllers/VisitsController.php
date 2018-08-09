@@ -10,8 +10,8 @@ class VisitsController
     echo json_encode($visits);
   }
 
-  public function oneVisit(){
-    $visit = App::get('database')->getOne('visits', $_GET['id']);
+  public function oneVisit($id){
+    $visit = App::get('database')->getOne('visits', $id);
     echo "<pre>" . json_encode($visit) . "</pre>";
   }
 
@@ -22,6 +22,10 @@ class VisitsController
   }
 
   public function visitTypes(){
+    $visits = App::get('database')->allVisitTypes();
+    echo json_encode($visits);
+  }
+  public function editVisit(){
     $visits = App::get('database')->allVisitTypes();
     echo json_encode($visits);
   }

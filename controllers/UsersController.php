@@ -16,10 +16,10 @@ class UsersController
   }
 
   public function addUser(){
-    $credentials = $_POST;
-    $credentials['password'] = hashPassword($credentials);
-    App::get('database')->addNew("users", $credentials);
-    echo json_encode('sucess');
+    $data = trim(file_get_contents("php://input"));
+    $decoded = json_decode($data, true);
+    $decoded['password'] = hashPassword($decoded);
+    App::get('database')->addNew("users", $decoded);
   }
 
 }

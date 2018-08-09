@@ -19,7 +19,6 @@ class CustomerController
     $customer = App::get('database')->getOne('customers', $params['customerId']);
     echo json_encode($customer);
   }
-
   public function petsFromCustomers(){
     $data = trim(file_get_contents("php://input"));
     $id = json_decode($data, true);
@@ -33,7 +32,16 @@ class CustomerController
   public function addCustomer(){
     $data = trim(file_get_contents("php://input"));
     $decoded = json_decode($data, true);
-    App::get('database')->addNew('customers', $decoded);
+    App::get('database')->addCustomer($decoded);
+  }
+
+  public function getSpecies(){
+    $species = App::get('database')->getAll('species');
+    echo json_encode($species);
+  }
+  public function getGenders(){
+    $genders = App::get('database')->getAll('genders');
+    echo json_encode($genders);
   }
 }
 

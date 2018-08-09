@@ -1,5 +1,6 @@
 <?php
 namespace App\Core;
+header("Access-Control-Allow-Origin: *");
 class Router
 {
   public $routes = [

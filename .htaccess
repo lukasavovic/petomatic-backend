@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteBase /app/
+RewriteRule ^.*$ index.php [END]

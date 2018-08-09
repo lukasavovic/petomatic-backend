@@ -31,7 +31,6 @@ class Router
     if(!is_null($route)) {
 
       if($route[1]) {
-
         if(isset($_SESSION['auth'])){
           $this->callAction(...explode('@', $route[0]));
         }else{
